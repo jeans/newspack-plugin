@@ -304,12 +304,23 @@ class Template_Helper {
 			return '';
 		}
 
-		$brand_html = sprintf(
-			'<p class="collection-brand has-medium-gray-color has-text-color has-link-color has-small-font-size"><span class="brand-label">%s:</span> <a href="%s">%s</a></p>',
-			esc_html__( 'Brand', 'newspack-plugin' ),
-			esc_url( get_term_link( $primary_brand ) ),
-			esc_html( $primary_brand->name )
-		);
+		$brand_link = get_term_link( $primary_brand );
+		if ( is_wp_error( $brand_link ) ) {
+			$brand_link = '';
+		}
+
+		$brand_html = $brand_link
+			? sprintf(
+				'<p class="collection-brand has-medium-gray-color has-text-color has-link-color has-small-font-size"><span class="brand-label">%s:</span> <a href="%s">%s</a></p>',
+				esc_html__( 'Brand', 'newspack-plugin' ),
+				esc_url( $brand_link ),
+				esc_html( $primary_brand->name )
+			)
+			: sprintf(
+				'<p class="collection-brand has-medium-gray-color has-text-color has-link-color has-small-font-size"><span class="brand-label">%s:</span> %s</p>',
+				esc_html__( 'Brand', 'newspack-plugin' ),
+				esc_html( $primary_brand->name )
+			);
 
 		/**
 		 * Filters the brand HTML for a collection.

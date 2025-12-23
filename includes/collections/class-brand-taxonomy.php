@@ -97,7 +97,6 @@ class Brand_Taxonomy {
 		}
 
 		// Return the first brand as the primary brand.
-		// In the future, this could be extended to support a meta field for primary brand selection.
 		return $brands[0];
 	}
 

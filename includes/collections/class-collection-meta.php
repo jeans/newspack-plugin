@@ -129,14 +129,6 @@ class Collection_Meta {
 					],
 				],
 			],
-			'primary_brand'              => [
-				'type'              => 'integer',
-				'label'             => __( 'Primary Brand', 'newspack-plugin' ),
-				'description'       => __( 'Set the primary brand for this collection.', 'newspack-plugin' ),
-				'single'            => true,
-				'sanitize_callback' => 'absint',
-				'show_in_rest'      => true,
-			],
 		];
 	}
 
