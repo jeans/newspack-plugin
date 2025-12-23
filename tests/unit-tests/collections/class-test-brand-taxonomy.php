@@ -35,7 +35,7 @@ class Test_Brand_Taxonomy extends WP_UnitTestCase {
 		Post_Type::register_post_type();
 
 		// Create a test collection.
-		$this->collection_id = $this->create_collection( 'Test Collection' );
+		$this->collection_id = $this->create_test_collection( [ 'post_title' => 'Test Collection' ] );
 	}
 
 	/**
