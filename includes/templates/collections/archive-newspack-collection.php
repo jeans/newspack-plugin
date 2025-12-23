@@ -40,6 +40,9 @@ do_action( 'newspack_collections_archive_start' );
 				$latest_collection = $wp_query->posts[0] ?? null;
 				if ( $latest_collection ) {
 					echo wp_kses_post( Template_Helper::render_collections_intro( $latest_collection, [ 'headingText' => __( 'Latest', 'newspack-plugin' ) ] ) );
+
+					// Display brand information if available.
+					echo wp_kses_post( Template_Helper::render_brand_info( $latest_collection ) );
 				}
 
 				echo wp_kses_post( Template_Helper::render_separator( 'is-latest-collection' ) );

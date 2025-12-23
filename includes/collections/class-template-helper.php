@@ -285,6 +285,43 @@ class Template_Helper {
 	}
 
 	/**
+	 * Render brand information for a collection.
+	 *
+	 * @param int|WP_Post $post Post ID or post object.
+	 * @return string Formatted brand HTML.
+	 */
+	public static function render_brand_info( $post ) {
+		$post_id = $post instanceof \WP_Post ? $post->ID : $post;
+
+		// Check if Multibranded Site Plugin is active.
+		if ( ! Brand_Taxonomy::is_multibranded_site_active() ) {
+			return '';
+		}
+
+		$primary_brand = Brand_Taxonomy::get_primary_brand( $post_id );
+
+		if ( ! $primary_brand ) {
+			return '';
+		}
+
+		$brand_html = sprintf(
+			'<p class="collection-brand has-medium-gray-color has-text-color has-link-color has-small-font-size"><span class="brand-label">%s:</span> <a href="%s">%s</a></p>',
+			esc_html__( 'Brand', 'newspack-plugin' ),
+			esc_url( get_term_link( $primary_brand ) ),
+			esc_html( $primary_brand->name )
+		);
+
+		/**
+		 * Filters the brand HTML for a collection.
+		 *
+		 * @param string  $brand_html    The brand HTML.
+		 * @param int     $post_id       Post ID.
+		 * @param WP_Term $primary_brand The primary brand term.
+		 */
+		return apply_filters( 'newspack_collections_render_brand_info', $brand_html, $post_id, $primary_brand );
+	}
+
+	/**
 	 * Render a CTA button.
 	 *
 	 * @param array $cta {
