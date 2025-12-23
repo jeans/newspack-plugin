@@ -21,6 +21,14 @@
 	aspect-ratio: 3 / 4;
 }
 
+.collection-brand {
+	margin-top: 1em;
+	margin-bottom: 1em;
+
+	.brand-label {
+		font-weight: 600;
+	}
+}
 
 .wp-block-newspack-collections__ctas {
 	a.cta--subscribe_link {
