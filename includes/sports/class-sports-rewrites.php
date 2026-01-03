@@ -67,8 +67,8 @@ class Sports_Rewrites {
 	 * Add query vars endpoint.
 	 */
 	public static function add_query_vars() {
-		// Add event endpoint for use in URLs.
-		add_rewrite_endpoint( self::EVENT_ENDPOINT, EP_ALL );
+		// Add event endpoint only for pages to minimize performance impact.
+		add_rewrite_endpoint( self::EVENT_ENDPOINT, EP_PAGES );
 	}
 
 	/**

@@ -179,12 +179,12 @@ class Sports_Sync {
 
 	/**
 	 * Handle post being trashed.
+	 * Terms are kept for restoration when post is untrashed.
 	 *
 	 * @param int $post_id Post ID.
 	 */
 	public static function handle_post_trashed( $post_id ) {
-		// For now, keep the term but we could mark it as inactive.
-		// This allows restoration if the post is untrashed.
+		// Terms remain active to allow restoration if post is untrashed.
 	}
 
 	/**

@@ -65,26 +65,23 @@ class Sports_Template_Loader {
 
 	/**
 	 * Locate a template file.
-	 * Checks theme directory first, then plugin directory.
+	 * Checks theme directory first. Plugin templates can be added in the future
+	 * if default templates are needed.
 	 *
 	 * @param string $template_name Template file name.
 	 * @return string|false Template path or false if not found.
 	 */
 	private static function locate_template( $template_name ) {
-		// Check theme directory first.
+		// Check theme directory for templates.
+		// Supports both 'newspack-sports/' subdirectory and root theme directory.
 		$theme_template = locate_template( [ 'newspack-sports/' . $template_name, $template_name ] );
 
 		if ( $theme_template ) {
 			return $theme_template;
 		}
 
-		// Check plugin templates directory.
-		$plugin_template = dirname( __DIR__ ) . '/templates/sports/' . $template_name;
-
-		if ( file_exists( $plugin_template ) ) {
-			return $plugin_template;
-		}
-
+		// No default plugin templates provided - themes must implement templates.
+		// Future enhancement: Add default templates in includes/templates/sports/.
 		return false;
 	}
 
