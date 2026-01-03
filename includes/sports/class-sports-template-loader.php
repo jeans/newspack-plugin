@@ -71,20 +71,17 @@ class Sports_Template_Loader {
 	 * @return string|false Template path or false if not found.
 	 */
 	protected static function locate_template( $template_name ) {
-		// Check in theme directory first.
+		// Check in theme directory.
+		// Themes can place templates in:
+		// - Root: {theme}/sport.php
+		// - Subdirectory: {theme}/newspack-sports/sport.php
 		$theme_template = locate_template( [ $template_name, 'newspack-sports/' . $template_name ] );
 		
 		if ( $theme_template ) {
 			return $theme_template;
 		}
 
-		// Check in plugin directory.
-		$plugin_template = dirname( __FILE__ ) . '/templates/' . $template_name;
-		
-		if ( file_exists( $plugin_template ) ) {
-			return $plugin_template;
-		}
-
+		// No template found - WordPress will use its default template hierarchy.
 		return false;
 	}
 

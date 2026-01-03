@@ -69,7 +69,14 @@ class Sports_Sync {
 
 		if ( $existing_term ) {
 			// Update existing term.
-			wp_update_term( $existing_term->term_id, Sports_Taxonomy::TAXONOMY, array_merge( $term_args, [ 'name' => $post->post_title ] ) );
+			$result = wp_update_term( $existing_term->term_id, Sports_Taxonomy::TAXONOMY, array_merge( $term_args, [ 'name' => $post->post_title ] ) );
+			
+			// Handle errors during term update.
+			if ( is_wp_error( $result ) ) {
+				// Log error for debugging.
+				// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+				error_log( 'Sports Sync: Failed to update term for post ID ' . $post_id . ': ' . $result->get_error_message() );
+			}
 		} else {
 			// Create new term.
 			$result = wp_insert_term( $post->post_title, Sports_Taxonomy::TAXONOMY, $term_args );
@@ -77,6 +84,10 @@ class Sports_Sync {
 			if ( ! is_wp_error( $result ) ) {
 				// Store the post ID in term meta for reverse lookup.
 				update_term_meta( $result['term_id'], 'sport_post_id', $post_id );
+			} else {
+				// Log error for debugging.
+				// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+				error_log( 'Sports Sync: Failed to create term for post ID ' . $post_id . ': ' . $result->get_error_message() );
 			}
 		}
 	}

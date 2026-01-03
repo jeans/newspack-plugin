@@ -30,9 +30,11 @@ Custom template loader routes requests to appropriate templates:
 - `competition.php` - Competition archive pages
 - `event.php` - Individual event/match pages
 
-Templates can be placed in either:
-- Theme directory: `{theme}/sport.php` or `{theme}/newspack-sports/sport.php`
-- Plugin directory: `includes/sports/templates/sport.php` (fallback)
+Templates should be placed in your theme:
+- Theme root: `{theme}/sport.php`, `{theme}/competition.php`, `{theme}/event.php`
+- Theme subdirectory: `{theme}/newspack-sports/sport.php`, etc.
+
+If no custom template is found, WordPress will use its default template hierarchy.
 
 ## Module Components
 
