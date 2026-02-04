@@ -4,7 +4,6 @@ type AccessRule = {
 	name: string;
 	description: string;
 	options?: { value: string; label: string }[];
-	conflicts?: string[];
 	is_boolean: boolean;
 	default: string | string[] | boolean;
 };
@@ -19,8 +18,7 @@ type ContentRule = {
 
 type Metering = {
 	enabled: boolean;
-	anonymous_count: number;
-	registered_count: number;
+	count: number;
 	period: 'week' | 'month';
 };
 
@@ -66,12 +64,55 @@ type GateStatus = 'publish' | 'draft' | 'pending' | 'future' | 'private' | 'tras
 type Gate = {
 	id: number;
 	title: string;
-	description: string;
-	metering: Metering;
-	access_rules: GateAccessRule[];
-	content_rules: GateContentRule[];
 	priority: number;
 	status: GateStatus;
 	isExpanded?: boolean;
 	collapse?: boolean;
+	content_rules: GateContentRule[];
+	registration: Registration;
+	custom_access: CustomAccess;
+};
+
+type Registration = {
+	active: boolean;
+	metering: Metering;
+	require_verification: boolean;
+	gate_layout_id: number;
+};
+
+type GateAccessRuleGroup = GateAccessRule[];
+
+type CustomAccess = {
+	active: boolean;
+	metering: Metering;
+	gate_layout_id: number;
+	access_rules: GateAccessRuleGroup[];
+};
+
+type ContentGiftingConfig = {
+	enabled: boolean;
+	limit: number;
+	interval: string;
+	expiration_time: number;
+	expiration_time_unit: string;
+	cta_label: string;
+	button_label: string;
+};
+
+type MeteringCountdownConfig = {
+	enabled: boolean;
+	style: string;
+	cta_label: string;
+	button_label: string;
+	cta_url: string;
+};
+
+type GateSettings = {
+	content_gifting?: ContentGiftingConfig;
+	countdown_banner?: MeteringCountdownConfig;
+};
+
+type GateConfig = {
+	gates: Gate[];
+	config: GateSettings
 };
