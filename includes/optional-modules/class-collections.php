@@ -15,6 +15,7 @@ use Newspack\Collections\Post_Type;
 use Newspack\Collections\Collection_Taxonomy;
 use Newspack\Collections\Collection_Category_Taxonomy;
 use Newspack\Collections\Collection_Section_Taxonomy;
+use Newspack\Collections\Brand_Taxonomy;
 use Newspack\Collections\Post_Meta;
 use Newspack\Collections\Cache;
 use Newspack\Collections\Template_Helper;
@@ -45,6 +46,7 @@ class Collections {
 		Collection_Taxonomy::init();
 		Collection_Category_Taxonomy::init();
 		Collection_Section_Taxonomy::init();
+		Brand_Taxonomy::init();
 		Post_Meta::init();
 		Cache::init();
 		Template_Helper::init();

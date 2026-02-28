@@ -38,6 +38,9 @@ get_header();
 			 */
 			do_action( 'newspack_collections_single_after_intro', $collection_id );
 
+			// Display brand information if available.
+			echo wp_kses_post( Template_Helper::render_brand_info( $collection_id ) );
+
 			echo wp_kses_post( Template_Helper::render_separator( 'is-latest-collection' ) );
 
 			// Get posts in this collection organized by sections.
